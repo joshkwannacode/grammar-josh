@@ -1,7 +1,7 @@
 import React from "react";
-import ResetButton2 from "./ResetButton2";
 
 export default function RemovableDiv(props) {
+  let data = Array.from(props.wrongWord);
   const characterCountMessage = () => {
     //if the number of characters left is 50,000 return "go ahead and write something", don't print anything
     if (props.charsLeft === 50000) {
@@ -32,13 +32,9 @@ export default function RemovableDiv(props) {
               <div className="wrongWords">
                 <p className="text-title">Error(s) found:</p>
                 <ol>
-                  {props.wrongWord == null ? (
-                    <p>no errors</p>
-                  ) : (
-                    props.wrongWord.map((word, index) => {
-                      return <li key={index}>{word}</li>;
-                    })
-                  )}
+                  {data.map((word, index) => {
+                    return <li key={index}>{word}</li>;
+                  })}
                 </ol>
                 {/* map over the array resulting from the axios call in order to find the error messages */}
                 <ul>
@@ -56,6 +52,16 @@ export default function RemovableDiv(props) {
           </div>
         </div>
       </>
+    );
+  } else if (
+    props.edits.length === 0 &&
+    props.checkClicked === false &&
+    props.isLoading === true
+  ) {
+    return (
+      <div className="no-errors">
+        <h2>No errors found in your sentence!</h2>
+      </div>
     );
   } else {
     return (

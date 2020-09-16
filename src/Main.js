@@ -14,6 +14,7 @@ function Main() {
   const [newEditState, setNewEditState] = useState("");
   const [wrongWord, setWrongWord] = useState("");
   const [checkClicked, setCheckClicked] = useState(true);
+  const [isLoading, setLoading] = useState(false);
 
   useEffect(() => {
     checkMyGrammar();
@@ -21,10 +22,10 @@ function Main() {
 
   //axios call
   const checkMyGrammar = () => {
-    axios({
+    return axios({
       method: "GET",
       url: "https://proxy.hackeryou.com",
-      dataResponse: "JSON",
+      dataResponse: "json",
       paramsSerializer: function (params) {
         return Qs.stringify(params, { arrayFormat: "brackets" });
       },
@@ -33,7 +34,7 @@ function Main() {
         params: {
           queryParam: userInput,
           key: "KS9C5N3Y",
-          format: "JSON",
+          format: "json",
           text: userInput,
           language: "en-US",
         },
@@ -44,22 +45,8 @@ function Main() {
       },
     })
       .then((results) => {
-        console.log("results", results);
         setEdits(results.data.matches);
-        //fix
-        // let inputCopy = userInput.split("");
-        // for (let i = results.data.matches.length - 1; i >= 0; i--) {
-        //   let currentMatch = results.data.matches[i];
-        //   inputCopy.splice(
-        //     currentMatch.context.offest,
-        //     currentMatch.context.length,
-        //     currentMatch.replacements[0].value
-        //   );
-        // }
-        // console.log(inputCopy);
-        // setEditedSentece(inputCopy);
 
-        //
         setWrongWord(
           results.data.matches.map((misspelling) => {
             console.log(misspelling);
@@ -84,6 +71,9 @@ function Main() {
         if (inputField !== "") {
           setNewEditState("");
         }
+        if (edits.length === 0 && checkClicked === false) {
+          setLoading(true);
+        }
       });
   };
 
@@ -104,7 +94,9 @@ function Main() {
   //when the user clicks the submit button
   const handleSubmit = (event) => {
     event.preventDefault();
-
+    setTimeout(() => {
+      setLoading(true);
+    }, 2000);
     setSavedInput(inputField);
     setInputField("");
     setCheckClicked(false);
@@ -143,6 +135,11 @@ function Main() {
 
         <main>
           <div className="controls">
+            {checkClicked === false && isLoading === false ? (
+              <div className="loading-screen">
+                <img src="#" alt="spinner" />
+              </div>
+            ) : null}
             <div className="errors">
               {/* render the information to the page */}
               <RemovableDiv
@@ -153,6 +150,7 @@ function Main() {
                 wrongWord={wrongWord}
                 handleReset={handleReset}
                 checkClicked={checkClicked}
+                isLoading={isLoading}
               />
             </div>
 

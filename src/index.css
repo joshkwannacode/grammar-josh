@@ -340,6 +340,15 @@ textarea {
   margin-left: 7vw;
   width: 20vw;
 }
+/* When there are no errors */
+.no-errors {
+  width: 100vw;
+  margin-left: 78vw;
+  margin-top: 5vh;
+}
+
+/* Loader */
+
 @media (max-width: 2560px) and (min-width: 2000px) {
   .page-container {
     width: 100vw;
@@ -397,6 +406,9 @@ textarea {
   .text-title {
     margin-right: 5vw;
     width: 10vw;
+  }
+  .no-errors {
+    margin-top: 15vh;
   }
 }
 @media (max-width: 1999.5px) {
@@ -471,6 +483,9 @@ textarea {
   textarea {
     width: 50vw;
   }
+  .no-errors {
+    font-size: 1vw;
+  }
 }
 
 @media (max-width: 545px) {
@@ -544,6 +559,9 @@ textarea {
   .text-title {
     margin-left: 12vw;
   }
+  .no-errors {
+    font-size: 1.5vw;
+  }
 }
 @media (max-width: 380px) {
   .reset-buttons {
@@ -554,6 +572,10 @@ textarea {
   }
   .wrongWords {
     font-size: 3vw;
+  }
+  .no-errors {
+    font-size: 2vw;
+    margin-right: 9vw;
   }
 }
 /*Footer*/
