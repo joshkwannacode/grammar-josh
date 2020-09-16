@@ -115,6 +115,7 @@ function Main() {
     setWrongWord("");
     setNewEditState("");
     setCheckClicked(true);
+    setLoading(false);
   };
 
   const handleReset = (event) => {
