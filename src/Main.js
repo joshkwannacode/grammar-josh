@@ -96,7 +96,7 @@ function Main() {
     event.preventDefault();
     setTimeout(() => {
       setLoading(true);
-    }, 2000);
+    }, 2500);
     setSavedInput(inputField);
     setInputField("");
     setCheckClicked(false);
@@ -133,50 +133,48 @@ function Main() {
             <p>{newEditState}</p>
           </div>
         </header>
-
-        <main>
-          <div className="controls">
-            {checkClicked === false && isLoading === false ? (
-              <div className="loading-screen">
-                <img src="#" alt="spinner" />
+        {checkClicked === false && isLoading === false ? (
+          <div className="loading-screen"></div>
+        ) : (
+          <main>
+            <div className="controls">
+              <div className="errors">
+                {/* render the information to the page */}
+                <RemovableDiv
+                  charsLeft={charsLeft}
+                  savedInput={savedInput}
+                  edits={edits}
+                  newEditState={newEditState}
+                  wrongWord={wrongWord}
+                  handleReset={handleReset}
+                  checkClicked={checkClicked}
+                  isLoading={isLoading}
+                />
               </div>
-            ) : null}
-            <div className="errors">
-              {/* render the information to the page */}
-              <RemovableDiv
-                charsLeft={charsLeft}
-                savedInput={savedInput}
-                edits={edits}
-                newEditState={newEditState}
-                wrongWord={wrongWord}
-                handleReset={handleReset}
-                checkClicked={checkClicked}
-                isLoading={isLoading}
-              />
+
+              {/* run the axios call in the form component upon submit */}
+              {checkClicked ? (
+                <GrammarForm
+                  run={checkMyGrammar}
+                  handleChange={handleChange}
+                  handleSubmit={handleSubmit}
+                  inputField={inputField}
+                  charsLeft={charsLeft}
+                  userInput={userInput}
+                  handleReset={handleReset}
+                />
+              ) : null}
+
+              {/* reset button when grammar form is gone */}
+              {checkClicked === false ? (
+                <ResetButton2
+                  handleReset={handleReset}
+                  className="reset-button2"
+                />
+              ) : null}
             </div>
-
-            {/* run the axios call in the form component upon submit */}
-            {checkClicked ? (
-              <GrammarForm
-                run={checkMyGrammar}
-                handleChange={handleChange}
-                handleSubmit={handleSubmit}
-                inputField={inputField}
-                charsLeft={charsLeft}
-                userInput={userInput}
-                handleReset={handleReset}
-              />
-            ) : null}
-
-            {/* reset button when grammar form is gone */}
-            {checkClicked === false ? (
-              <ResetButton2
-                handleReset={handleReset}
-                className="reset-button2"
-              />
-            ) : null}
-          </div>
-        </main>
+          </main>
+        )}
       </div>
     </div>
   );
