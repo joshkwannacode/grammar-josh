@@ -369,8 +369,6 @@ textarea {
   margin-top: 5vh;
 }
 
-/* Loader */
-
 @media (max-width: 2560px) and (min-width: 2000px) {
   .loading-screen {
     margin-top: 25vh;
@@ -466,17 +464,15 @@ textarea {
     margin-right: 14vw;
   }
   .user-input {
-    height: 13vh;
     margin-left: 15vw;
     width: 20vw;
   }
   .wrongWords {
-    height: 13vh;
     width: 20vw;
     margin-left: 15vw;
   }
   .text-title {
-    margin-right: 15vw;
+    margin-left: 7vw;
     width: 100vw;
   }
   .character-count-message {
@@ -505,7 +501,7 @@ textarea {
     font-size: 1vw;
   }
   .text-title {
-    margin-left: 7vw;
+    margin-left: 12vw;
   }
   textarea {
     width: 50vw;
